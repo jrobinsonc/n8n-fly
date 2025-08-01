@@ -1,0 +1,31 @@
+app = 'n8n-app-123456789'
+primary_region = 'iad'
+
+[build]
+  image = 'docker.n8n.io/n8nio/n8n'
+
+[env]
+  GENERIC_TIMEZONE = 'UTC'
+  N8N_DIAGNOSTICS_ENABLED = 'false'
+  N8N_HIRING_BANNER_ENABLED = 'false'
+  N8N_HOST = 'n8n-app-123456789.fly.dev'
+  TINI_SUBREAPER = 'true'
+  TZ = 'UTC'
+  WEBHOOK_URL = 'https://n8n-app-123456789.fly.dev'
+
+[[mounts]]
+  source = 'n8n_data'
+  destination = '/home/node/.n8n'
+
+[http_service]
+  internal_port = 5678
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 1
+
+[[vm]]
+  size = 'shared-cpu-1x'
+  memory = '512mb'
+  cpu_kind = 'shared'
+  cpus = 1
